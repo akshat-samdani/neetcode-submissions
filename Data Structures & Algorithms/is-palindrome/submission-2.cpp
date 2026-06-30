@@ -1,0 +1,47 @@
+class Solution {
+public:
+    bool isPalindrome(string s) {
+        /* Two pointers - O(n) & O(n) */
+
+        // Cleanify input
+        // string cleanedStr = "";
+        // for (char c : s) {
+        //     if (isalnum((unsigned char)c)) { // Checks if it's A-Z, a-z, or 0-9
+        //         cleanedStr += tolower((unsigned char)c);
+        //     }
+        // }
+
+        // int n = cleanedStr.size();
+        // int left = 0, right = n - 1;
+        // while (left < right) {
+        //     if(cleanedStr[left] != cleanedStr[right]) {
+        //         return false;
+        //     }
+        //     left += 1;
+        //     right -= 1;
+        // }
+        // return true;
+
+         /* Two pointers Single Pass - O(n) & O(1) */
+        int left = 0, right = s.size() - 1;
+
+        while (left < right) {
+            while (left < right && !isalnum(s[left])) {
+                left++;
+            }
+            while (left < right && !isalnum(s[right])) {
+                right--;
+            }
+            // Check again because pointers might have met in the middle
+            if (left < right) {
+                if (tolower(s[left]) != tolower(s[right])) return false;
+                left++;
+                right--;
+            }
+        }
+
+        return true;
+        
+        
+    }
+};
